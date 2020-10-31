@@ -8,7 +8,11 @@ import numpy as np
 import time
 import cv2
 from config import args
-
+import logging
+logging.basicConfig(
+    level=logging.INFO
+)
+print = logging.info
 # load the input image and grab the image dimensions
 image = cv2.imread(args["image"])
 orig = image.copy()
@@ -102,7 +106,7 @@ for y in range(0, numRows):
 # apply non-maxima suppression to suppress weak, overlapping bounding
 # boxes
 boxes = non_max_suppression(np.array(rects), probs=confidences)
-
+points = []
 # loop over the bounding boxes
 for (startX, startY, endX, endY) in boxes:
     # scale the bounding box coordinates based on the respective
@@ -111,11 +115,13 @@ for (startX, startY, endX, endY) in boxes:
     startY = int(startY * rH)
     endX = int(endX * rW)
     endY = int(endY * rH)
+    points.append([startX, startY, endX, endY])
 
-    # draw the bounding box on the image
-    cv2.rectangle(orig, (startX, startY), (endX, endY), (0, 255, 0), 2)
-
-# show the output image
-# cv2.imshow("Text Detection", orig)
-# cv2.waitKey(0)
-cv2.imwrite("save.jpg", orig)
+points = np.array(points)
+bbox = (
+    np.min(points[:,0]), np.min(points[:,1]),
+    np.max(points[:,2]), np.max(points[:,3]),
+)
+print(bbox)
+print(f"orig.shape={orig.shape}")
+cv2.imwrite("save_2.jpg", orig[bbox[1]:bbox[3], bbox[0]:bbox[2], :])

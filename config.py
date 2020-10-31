@@ -12,9 +12,9 @@
 #                 help="resized image height (should be multiple of 32)")
 # args = vars(ap.parse_args())
 args = {
-    "image": "images/car_wash.png",
-    "east": "",
-    "min-confidence": 0.5,
+    "image": "images/微信图片_20201031173555.jpg",
+    "east": "weights/frozen_east_text_detection.pb",
+    "min_confidence": 0.5,
     "width": 320,
     "height": 320
 }
