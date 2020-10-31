@@ -38,7 +38,7 @@ def preProcess(image):
 
 if __name__ == "__main__":
     from PIL import Image
-    image = cv2.imread("imgs/image.jpg")
+    image = cv2.imread("imgs/微信图片_20201031164555.png")
     screenCnt, ratio = preProcess(image)
     warped = four_point_transform(image, screenCnt.reshape(4, 2) * ratio)
 
