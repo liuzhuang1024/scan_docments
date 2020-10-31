@@ -1,6 +1,5 @@
 from PIL import ImageEnhance
 import numpy as np
-import cv2
 
 class Enhancer:
     def bright(self, image, brightness):
