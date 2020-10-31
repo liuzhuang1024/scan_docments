@@ -3,12 +3,14 @@ import cv2
 import imutils
 import imEnhance
 import numpy as np
-import logging 
+import logging
+
 logging.basicConfig(
     level=logging.INFO
 )
 
 print = logging.info
+
 
 def preProcess(image):
     ratio = image.shape[0] / 500.0
