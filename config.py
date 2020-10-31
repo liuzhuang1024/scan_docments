@@ -12,7 +12,7 @@
 #                 help="resized image height (should be multiple of 32)")
 # args = vars(ap.parse_args())
 args = {
-    "image": "images/微信图片_20201031173555.jpg",
+    "image": "images/微信图片_20201031175806.jpg",
     "east": "weights/frozen_east_text_detection.pb",
     "min_confidence": 0.5,
     "width": 320,

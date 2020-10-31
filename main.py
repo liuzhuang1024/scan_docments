@@ -124,4 +124,4 @@ bbox = (
 )
 print(bbox)
 print(f"orig.shape={orig.shape}")
-cv2.imwrite("save_2.jpg", orig[bbox[1]:bbox[3], bbox[0]:bbox[2], :])
+cv2.imwrite("images/save_2.jpg", orig[bbox[1]:bbox[3], bbox[0]:bbox[2], :])

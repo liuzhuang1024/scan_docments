@@ -116,6 +116,4 @@ for (startX, startY, endX, endY) in boxes:
     cv2.rectangle(orig, (startX, startY), (endX, endY), (0, 255, 0), 2)
 
 # show the output image
-# cv2.imshow("Text Detection", orig)
-# cv2.waitKey(0)
-cv2.imwrite("save.jpg", orig)
+cv2.imwrite("images/save.jpg", orig)
