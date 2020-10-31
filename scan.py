@@ -45,6 +45,7 @@ if __name__ == "__main__":
     # enhancer = imEnhance.Enhancer()
     # enhancedImg = enhancer.gamma(warped, 1.63)
 
-    Image.fromarray(image).show()
+    # Image.fromarray(image).save()
     print(warped.shape)
-    Image.fromarray(warped).show()
+    Image.fromarray(warped).save("imgs/image_save.jpg")
+    print('save("imgs/image_save.jpg")')
