@@ -140,6 +140,7 @@ class Scan:
             "status": "sucess",
             "result_image": orig[bbox[1]:bbox[3], bbox[0]:bbox[2], :],
             "save_path": "images/save_2.jpg",
+            "text_bbox": bbox,
         }
 
     def heart(self):
