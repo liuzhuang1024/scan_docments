@@ -35,7 +35,7 @@ class Scan:
         image = cv2.imread(image_path)
         orig = image.copy()
         (H, W) = image.shape[:2]
-
+        orign_WH = (W, H)
         # set the new width and height and then determine the ratio in change
         # for both the width and height
         (newW, newH) = (args["width"], args["height"])
@@ -130,12 +130,17 @@ class Scan:
             np.min(points[:, 0]), np.min(points[:, 1]),
             np.max(points[:, 2]), np.max(points[:, 3]),
         )
+
+        bbox = [bbox[0]//2, bbox[1]//2,
+                orign_WH[0] - (orign_WH[0] - bbox[2])//2, orign_WH[1] - (orign_WH[1] - bbox[3])//2]
         print(bbox)
         print(f"orig.shape={orig.shape}")
         if save_flag:
             print("Saving!!!!")
             cv2.imwrite("images/save_2.jpg",
                         orig[bbox[1]:bbox[3], bbox[0]:bbox[2], :])
+
+
         return {
             "status": "sucess",
             "result_image": orig[bbox[1]:bbox[3], bbox[0]:bbox[2], :],
@@ -148,4 +153,4 @@ class Scan:
 
 
 if __name__ == "__main__":
-    Scan().run("images/微信图片_20201031175806.jpg", True)
+    print(Scan().run("images/微信图片_20201031175806.jpg", True)["text_bbox"])
