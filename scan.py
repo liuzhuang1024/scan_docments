@@ -7,6 +7,7 @@ from imutils.object_detection import non_max_suppression
 import numpy as np
 import time
 import cv2
+from PIL import Image, ImageDraw
 from config import args
 import logging
 logging.basicConfig(
@@ -135,11 +136,23 @@ class Scan:
                 orign_WH[0] - (orign_WH[0] - bbox[2])//2, orign_WH[1] - (orign_WH[1] - bbox[3])//2]
         print(bbox)
         print(f"orig.shape={orig.shape}")
+        bbox = list(map(int, bbox))
+        img = Image.fromarray(orig)
+        for _ in range(0, orign_WH[0], 16):
+                ImageDraw.floodfill(
+                    img, xy=(_, bbox[1]), value=(255, 255, 255), thresh=255)
+                ImageDraw.floodfill(
+                    img, xy=(_, bbox[3]), value=(255, 255, 255), thresh=255)
+        for _ in range(0, orign_WH[1], 16):
+            ImageDraw.floodfill(
+                img, xy=(bbox[0], _), value=(255, 255, 255), thresh=255)
+            ImageDraw.floodfill(
+                img, xy=(bbox[2], _), value=(255, 255, 255), thresh=255)
         if save_flag:
             print("Saving!!!!")
             cv2.imwrite("images/save_2.jpg",
                         orig[bbox[1]:bbox[3], bbox[0]:bbox[2], :])
-
+            img.save("images/save_pillow.jpg")
 
         return {
             "status": "sucess",
